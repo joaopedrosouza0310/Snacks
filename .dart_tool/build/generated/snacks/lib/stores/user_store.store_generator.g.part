@@ -5,6 +5,23 @@
 // ignore_for_file: non_constant_identifier_names, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$UserStore on _UserStoreBase, Store {
+  final _$userAtom = Atom(name: '_UserStoreBase.user');
+
+  @override
+  FirebaseUser get user {
+    _$userAtom.context.enforceReadPolicy(_$userAtom);
+    _$userAtom.reportObserved();
+    return super.user;
+  }
+
+  @override
+  set user(FirebaseUser value) {
+    _$userAtom.context.conditionallyRunInAction(() {
+      super.user = value;
+      _$userAtom.reportChanged();
+    }, _$userAtom, name: '${_$userAtom.name}_set');
+  }
+
   final _$userDataAtom = Atom(name: '_UserStoreBase.userData');
 
   @override
@@ -250,7 +267,7 @@ mixin _$UserStore on _UserStoreBase, Store {
   @override
   String toString() {
     final string =
-        'userData: ${userData.toString()},email: ${email.toString()},pass: ${pass.toString()},name: ${name.toString()},address: ${address.toString()},cellphone: ${cellphone.toString()},isLoggedIn: ${isLoggedIn.toString()},loading: ${loading.toString()},isVisiblePassword: ${isVisiblePassword.toString()}';
+        'user: ${user.toString()},userData: ${userData.toString()},email: ${email.toString()},pass: ${pass.toString()},name: ${name.toString()},address: ${address.toString()},cellphone: ${cellphone.toString()},isLoggedIn: ${isLoggedIn.toString()},loading: ${loading.toString()},isVisiblePassword: ${isVisiblePassword.toString()}';
     return '{$string}';
   }
 }

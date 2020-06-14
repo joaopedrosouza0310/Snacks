@@ -9,8 +9,8 @@ class CartStore = _CartStoreBase with _$CartStore;
 abstract class _CartStoreBase with Store {
   UserStore userStore;
 
-  @observable
-  List<CartData> products = [];
+  //@observable
+  ObservableList<CartData> products = ObservableList();
 
   @observable
   bool loading = false;
@@ -31,7 +31,19 @@ abstract class _CartStoreBase with Store {
         .then((doc) {
       c.cartId = doc.documentID;
     });
-    products.add(c);
+    products.add(c); // = List.of(products..add(c));
+  }
+
+  @action
+  void removeCartItem(CartData c) {
+    products.remove(c); // = List.of(products..remove(cartData));
+
+    Firestore.instance
+        .collection("users")
+        .document(userStore.user.uid)
+        .collection("cart")
+        .document(c.cartId)
+        .delete();
   }
 
   @action
@@ -43,7 +55,7 @@ abstract class _CartStoreBase with Store {
         .collection("cart")
         .getDocuments();
 
-    products = List.from(
+    products.addAll(
         query.documents.map((doc) => CartData.fromDocument(doc)).toList());
 
     loading = false;

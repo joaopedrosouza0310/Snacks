@@ -56,7 +56,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     return Badge(
                       badgeColor: yellowColor,
                       showBadge: userStore.userData != null ? true : false,
-                      badgeContent: Text("${cartStore.products.length}"),
+                      badgeContent: Text("${cartStore.products?.length}"),
                       child: Icon(Icons.shopping_cart),
                     );
                   }),

@@ -1,7 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:snacks/data/cart_data.dart';
 import 'package:snacks/data/product_data.dart';
+import 'package:snacks/stores/cart_store.dart';
 import 'package:snacks/themes/colors.dart';
 
 class CartTile extends StatelessWidget {
@@ -51,7 +53,7 @@ class CartTile extends StatelessWidget {
                   Text(
                     "R\$ ${cartData.productData.price.toStringAsFixed(2)}",
                     style: TextStyle(
-                        color: Theme.of(context).primaryColor,
+                        color: redColor,
                         fontWeight: FontWeight.bold,
                         fontSize: 20),
                   ),
@@ -72,8 +74,11 @@ class CartTile extends StatelessWidget {
                         style: TextStyle(fontSize: 20),
                       ),
                       IconButton(
-                        icon: Icon(Icons.add_circle,
-                            size: 22, color: Theme.of(context).primaryColor),
+                        icon: Icon(
+                          Icons.add_circle,
+                          color: Colors.green,
+                          size: 22,
+                        ),
                         onPressed: () {
                           //CartModel.of(context).incProduct(cartProduct);
                         },
@@ -96,7 +101,8 @@ class CartTile extends StatelessWidget {
                         ),
                         textColor: Colors.grey,
                         onPressed: () {
-                          //CartModel.of(context).removeCartItem(cartProduct);
+                          Provider.of<CartStore>(context, listen: false)
+                              .removeCartItem(cartData);
                         },
                       )
                     ],

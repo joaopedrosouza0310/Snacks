@@ -151,7 +151,7 @@ class _ProductScreenState extends State<ProductScreen> {
                       icon: Icon(
                         Icons.remove_circle,
                         color: Colors.red,
-                        size: 30,
+                        size: 25,
                       ),
                       onPressed: () {
                         setState(() {
@@ -162,13 +162,13 @@ class _ProductScreenState extends State<ProductScreen> {
                       }),
                   Text(
                     "$quantidade",
-                    style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
+                    style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
                   ),
                   IconButton(
                       icon: Icon(
                         Icons.add_circle,
                         color: Colors.green,
-                        size: 30,
+                        size: 25,
                       ),
                       onPressed: () {
                         setState(() {
@@ -195,7 +195,8 @@ class _ProductScreenState extends State<ProductScreen> {
                                 CartData c = CartData();
                                 c.productId = product.id;
                                 c.category = product.categoryId;
-                                if (ingredientes != null ||
+                                if (
+                                  //ingredientes != null &&
                                     ingredientes.length > 0) {
                                   c.ingredients = ingredientes;
                                 }
@@ -217,11 +218,23 @@ class _ProductScreenState extends State<ProductScreen> {
                               }
                             }
                           : null,
-                      child: Text(
-                        userStore.isLoggedIn
-                            ? "Adicionar ao carrinho"
-                            : "Faça login para comprar",
-                        style: TextStyle(fontSize: 23),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          Icon(
+                            userStore.isLoggedIn
+                                ? Icons.shopping_cart
+                                : Icons.supervisor_account,
+                            color: Colors.white,
+                          ),
+                          SizedBox(width: 5),
+                          Text(
+                            userStore.isLoggedIn
+                                ? "Adicionar ao carrinho"
+                                : "Faça login para comprar",
+                            style: TextStyle(fontSize: 23),
+                          ),
+                        ],
                       )),
                 ),
               ),

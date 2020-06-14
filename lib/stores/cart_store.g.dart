@@ -9,23 +9,6 @@ part of 'cart_store.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$CartStore on _CartStoreBase, Store {
-  final _$productsAtom = Atom(name: '_CartStoreBase.products');
-
-  @override
-  List<CartData> get products {
-    _$productsAtom.context.enforceReadPolicy(_$productsAtom);
-    _$productsAtom.reportObserved();
-    return super.products;
-  }
-
-  @override
-  set products(List<CartData> value) {
-    _$productsAtom.context.conditionallyRunInAction(() {
-      super.products = value;
-      _$productsAtom.reportChanged();
-    }, _$productsAtom, name: '${_$productsAtom.name}_set');
-  }
-
   final _$loadingAtom = Atom(name: '_CartStoreBase.loading');
 
   @override
@@ -64,9 +47,18 @@ mixin _$CartStore on _CartStoreBase, Store {
   }
 
   @override
+  void removeCartItem(CartData c) {
+    final _$actionInfo = _$_CartStoreBaseActionController.startAction();
+    try {
+      return super.removeCartItem(c);
+    } finally {
+      _$_CartStoreBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
-    final string =
-        'products: ${products.toString()},loading: ${loading.toString()}';
+    final string = 'loading: ${loading.toString()}';
     return '{$string}';
   }
 }
