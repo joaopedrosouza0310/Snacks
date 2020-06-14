@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:provider/provider.dart';
 import 'package:snacks/screens/login_screen.dart';
+import 'package:snacks/stores/cart_store.dart';
 import 'package:snacks/stores/user_store.dart';
 import 'package:snacks/themes/colors.dart';
 import 'package:snacks/screens/cart_screen.dart';
@@ -16,6 +17,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
   @override
   Widget build(BuildContext context) {
     final userStore = Provider.of<UserStore>(context);
+    final cartStore = Provider.of<CartStore>(context);
 
     Widget _buildDrawerBack() => Container(
           decoration: BoxDecoration(
@@ -64,6 +66,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
                           builder: (context) => LoginScreen()));
                     } else {
                       userStore.signOut();
+                      cartStore.userStore.user = null;
                       Navigator.of(context).pop();
                     }
                   },

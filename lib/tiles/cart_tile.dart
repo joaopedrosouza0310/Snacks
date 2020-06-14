@@ -19,11 +19,14 @@ class CartTile extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.start,
         children: <Widget>[
           Container(
-            width: 100,
-            height: 100,
-            child: Image.network(
-              cartData.productData.images[0],
-              fit: BoxFit.cover,
+            margin: EdgeInsets.all(5),
+            width: 80,
+            height: 90,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(5),
+              image: DecorationImage(
+                  image: NetworkImage(cartData.productData.images[0]),
+                  fit: BoxFit.cover),
             ),
           ),
           Expanded(
@@ -35,13 +38,15 @@ class CartTile extends StatelessWidget {
                 children: <Widget>[
                   Text(
                     cartData.productData.name,
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25),
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
                   ),
                   Text(
                     cartData.ingredients != null
-                        ? "Ingredientes: ${cartData.ingredients}"
+                        ? "Ingr. selecionados: ${cartData.ingredients}"
                         : "Descrição: ${cartData.productData.description}",
-                    style: TextStyle(fontWeight: FontWeight.w300, fontSize: 18),
+                    overflow: TextOverflow.ellipsis,
+                    maxLines: 2,
+                    style: TextStyle(fontWeight: FontWeight.w300, fontSize: 15),
                   ),
                   Text(
                     "R\$ ${cartData.productData.price.toStringAsFixed(2)}",
@@ -55,7 +60,7 @@ class CartTile extends StatelessWidget {
                     children: <Widget>[
                       IconButton(
                         icon: Icon(Icons.remove_circle,
-                            color: Theme.of(context).primaryColor),
+                            size: 22, color: Theme.of(context).primaryColor),
                         onPressed: cartData.quantity > 1
                             ? () {
                                 //CartModel.of(context).decProduct(cartProduct);
@@ -68,21 +73,24 @@ class CartTile extends StatelessWidget {
                       ),
                       IconButton(
                         icon: Icon(Icons.add_circle,
-                            color: Theme.of(context).primaryColor),
+                            size: 22, color: Theme.of(context).primaryColor),
                         onPressed: () {
                           //CartModel.of(context).incProduct(cartProduct);
                         },
                       ),
                       FlatButton(
+                        padding: EdgeInsets.all(0),
                         child: Row(
                           children: <Widget>[
-                            Text(
-                              "Remover",
-                              style: TextStyle(fontSize: 20),
-                            ),
                             Icon(
                               Icons.delete,
                               color: redColor,
+                              size: 20,
+                            ),
+                            SizedBox(width: 5),
+                            Text(
+                              "Remover",
+                              style: TextStyle(fontSize: 15),
                             )
                           ],
                         ),

@@ -1,3 +1,4 @@
+import 'package:badges/badges.dart';
 import 'package:carousel_pro/carousel_pro.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -28,34 +29,6 @@ class _HomeScreenState extends State<HomeScreen> {
     cartStore = Provider.of<CartStore>(context);
   }
 
-//  @override
-//   void initState() {
-//
-//     super.initState();
-//
-//     Firestore.instance
-//         .collection("categories")
-//         .document("Sucos")
-//         .collection("items")
-//         .document("UW1QQF6dSEAMCV9rjL5M")
-//         .get()
-//         .then((v) {
-//       for (int i = 0; i < 4; i++) {
-//         Firestore.instance
-//             .collection("categories")
-//             .document("Sucos")
-//             .collection("items")
-//             .add({
-//           "description": v["description"],
-//           "images": v["images"],
-//           "ingredients": v["ingredients"],
-//           "name": v["name"],
-//           "price": v["price"]
-//         });
-//       }
-//     });
-//   }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -72,46 +45,22 @@ class _HomeScreenState extends State<HomeScreen> {
         actions: <Widget>[
           Observer(builder: (_) {
             return GestureDetector(
-              onTap: () {
-                Navigator.of(context).push(
-                    MaterialPageRoute(builder: (context) => CartScreen()));
-              },
-              child: Row(
-                children: <Widget>[
-                  Stack(
-                    children: <Widget>[
-                      Icon(
-                        Icons.shopping_cart,
-                        size: 40,
-                        color: Colors.white,
-                      ),
-                      Positioned(
-                        right: 0,
-                        top: 0,
-                        child: Container(
-                          alignment: Alignment.center,
-                          child: Text(
-                            "${cartStore.products.length}",
-                            style: TextStyle(
-                                color: Colors.black,
-                                fontWeight: FontWeight.bold),
-                          ),
-                          height: 22,
-                          width: 22,
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            color: yellowColor,
-                          ),
-                        ),
-                      )
-                    ],
-                  ),
-                  SizedBox(
-                    width: 10,
-                  )
-                ],
-              ),
-            );
+                onTap: () {
+                  Navigator.of(context).push(
+                      MaterialPageRoute(builder: (context) => CartScreen()));
+                },
+                child: Container(
+                  margin: EdgeInsets.only(right: 20),
+                  alignment: Alignment.center,
+                  child: Observer(builder: (_) {
+                    return Badge(
+                      badgeColor: yellowColor,
+                      showBadge: userStore.userData != null ? true : false,
+                      badgeContent: Text("${cartStore.products.length}"),
+                      child: Icon(Icons.shopping_cart),
+                    );
+                  }),
+                ));
           }),
         ],
       ),

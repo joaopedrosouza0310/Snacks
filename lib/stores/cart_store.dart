@@ -8,7 +8,7 @@ class CartStore = _CartStoreBase with _$CartStore;
 
 abstract class _CartStoreBase with Store {
   UserStore userStore;
-  
+
   @observable
   List<CartData> products = [];
 
@@ -43,11 +43,9 @@ abstract class _CartStoreBase with Store {
         .collection("cart")
         .getDocuments();
 
-    products = List.of(
+    products = List.from(
         query.documents.map((doc) => CartData.fromDocument(doc)).toList());
 
     loading = false;
-
-    //products.map((e) => print(e.quantity)).toList();
   }
 }

@@ -1,17 +1,20 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:mobx/mobx.dart';
 import 'package:snacks/data/user_data.dart';
 part 'user_store.g.dart';
 
 class UserStore = _UserStoreBase with _$UserStore;
 
-abstract class _UserStoreBase with Store {
+abstract class _UserStoreBase extends ChangeNotifier with Store {
   _UserStoreBase() {
     _loadCurrentUser();
   }
 
   FirebaseAuth _auth = FirebaseAuth.instance;
+
+  @observable
   FirebaseUser user;
 
   @observable
@@ -102,6 +105,8 @@ abstract class _UserStoreBase with Store {
 
     isLoggedIn = false;
     loading = false;
+
+    notifyListeners();
   }
 
   @action

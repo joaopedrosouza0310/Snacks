@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class UserData {
+  String id;
   String name;
   String email;
   String address;
@@ -9,6 +10,7 @@ class UserData {
   UserData({this.name, this.email, this.address, this.cellphone});
 
   UserData.fromDocument(DocumentSnapshot doc) {
+    id = doc.documentID;
     name = doc.data['name'];
     email = doc.data['email'];
     address = doc.data['address'];
@@ -16,11 +18,18 @@ class UserData {
   }
 
   Map<String, dynamic> toMap() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['name'] = this.name;
-    data['email'] = this.email;
-    data['address'] = this.address;
-    data['cellphone'] = this.cellphone;
-    return data;
+    return {
+      "name": this.name,
+      "email": this.email,
+      "address": this.address,
+      "cellphone": this.cellphone
+    };
+
+    // final Map<String, dynamic> data = new Map<String, dynamic>();
+    // data['name'] = this.name;
+    // data['email'] = this.email;
+    // data['address'] = this.address;
+    // data['cellphone'] = this.cellphone;
+    // return data;
   }
 }

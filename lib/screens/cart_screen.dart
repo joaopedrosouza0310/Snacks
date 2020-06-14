@@ -4,7 +4,6 @@ import 'package:provider/provider.dart';
 import 'package:snacks/screens/login_screen.dart';
 import 'package:snacks/stores/cart_store.dart';
 import 'package:snacks/stores/user_store.dart';
-import 'package:snacks/themes/colors.dart';
 import 'package:snacks/widgets/discount_card.dart';
 import 'package:snacks/tiles/cart_tile.dart';
 

@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        Provider<UserStore>(create: (_) => UserStore()),
+        ChangeNotifierProvider(create: (_) => UserStore()),
         ProxyProvider<UserStore, CartStore>(
           update: (_, user, __) => CartStore(user),
         )

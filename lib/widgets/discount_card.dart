@@ -1,7 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:snacks/stores/cart_store.dart';
 
 class DiscountCard extends StatelessWidget {
   @override
