@@ -4,8 +4,10 @@ import 'package:provider/provider.dart';
 import 'package:snacks/screens/login_screen.dart';
 import 'package:snacks/stores/cart_store.dart';
 import 'package:snacks/stores/user_store.dart';
+import 'package:snacks/widgets/cart_price.dart';
 import 'package:snacks/widgets/discount_card.dart';
 import 'package:snacks/tiles/cart_tile.dart';
+import 'package:snacks/widgets/ship_card.dart';
 
 class CartScreen extends StatefulWidget {
   @override
@@ -31,7 +33,6 @@ class _CartScreenState extends State<CartScreen> {
             style: TextStyle(fontSize: 27),
           ),
           centerTitle: true,
-          
         ),
         body: Observer(builder: (_) {
           if (cartStore.loading && Provider.of<UserStore>(context).isLoggedIn) {
@@ -94,18 +95,9 @@ class _CartScreenState extends State<CartScreen> {
                   return CartTile(product);
                 }).toList(),
               ),
-
               DiscountCard(),
-
-              // ShipCard(),
-
-              // CartPrice(() async {
-              //   String orderId = await cartStore.finishOrder();
-
-              //   if (orderId != null) {
-              //     Navigator.of(context).pushReplacement(MaterialPageRoute(
-              //         builder: (context) => OrderScreen(orderId)));
-              //   }
+              ShipCard(),
+              CartPrice(() {})
             ]);
           }
         }) //bodyCartScreen(),

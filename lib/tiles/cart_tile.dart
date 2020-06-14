@@ -13,10 +13,9 @@ class CartTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    //print("recarregou todo a árvore");
-    Widget _buildContent() {
-      //CartModel.of(context).updatePrices();
+    //final cartStore = Provider.of<CartStore>(context);
 
+    Widget _buildContent() {
       return Row(
         mainAxisAlignment: MainAxisAlignment.start,
         children: <Widget>[
@@ -129,6 +128,7 @@ class CartTile extends StatelessWidget {
                 if (snapshot.hasData) {
                   cartData.productData =
                       ProductData.fromDocument(snapshot.data);
+
                   return _buildContent();
                 } else {
                   return Container(

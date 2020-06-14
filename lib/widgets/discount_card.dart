@@ -13,7 +13,7 @@ class DiscountCard extends StatelessWidget {
           Padding(
             padding: EdgeInsets.all(8),
             child: TextFormField(
-              initialValue: "teste", //cartStore.couponCode ?? "",
+              //initialValue: "teste", //cartStore.couponCode ?? "",
               onFieldSubmitted: (text) {
                 Firestore.instance
                     .collection("coupons")

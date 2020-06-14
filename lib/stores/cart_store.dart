@@ -60,4 +60,14 @@ abstract class _CartStoreBase with Store {
 
     loading = false;
   }
+
+  double getProductsPrice() {
+    double price = 0;
+    products.map((cartData) {
+      if(cartData.productData != null){
+        price += (cartData.productData.price * cartData.quantity);
+      }
+    }).toList();
+    return price;
+  }
 }
