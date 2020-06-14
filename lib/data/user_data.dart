@@ -24,12 +24,5 @@ class UserData {
       "address": this.address,
       "cellphone": this.cellphone
     };
-
-    // final Map<String, dynamic> data = new Map<String, dynamic>();
-    // data['name'] = this.name;
-    // data['email'] = this.email;
-    // data['address'] = this.address;
-    // data['cellphone'] = this.cellphone;
-    // return data;
   }
 }

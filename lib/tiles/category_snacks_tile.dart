@@ -21,15 +21,9 @@ class CategorySnacksTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-        elevation: 2,
+        elevation: 1,
         child: ExpansionTile(
           initiallyExpanded: true,
-          // leading: CircleAvatar(
-          //   radius: 25,
-          //   backgroundColor: redColor,
-          //   backgroundImage: NetworkImage(doc["icon"]),
-          // ),
-
           title: Text(
             doc.documentID,
             style: TextStyle(
@@ -53,7 +47,6 @@ class CategorySnacksTile extends StatelessWidget {
                       },
                       shrinkWrap: true,
                       physics: ClampingScrollPhysics(),
-
                       itemBuilder: (context, index) {
                         var e = snapshot.data.documents[index];
                         return ListTile(
@@ -74,14 +67,7 @@ class CategorySnacksTile extends StatelessWidget {
                                 image: DecorationImage(
                                     image: NetworkImage(e["images"][0]),
                                     fit: BoxFit.cover)),
-                          )
-
-                          // CircleAvatar(
-                          //   radius: 25,
-                          //   backgroundImage: NetworkImage(e["images"][0]),
-                          // )
-
-                          ,
+                          ),
                           title: Text(
                             e["name"],
                             style: TextStyle(
@@ -99,63 +85,6 @@ class CategorySnacksTile extends StatelessWidget {
                               )),
                         );
                       },
-
-                      // children: snapshot.data.documents.map((e) {
-                      //   // String ingredients = "";
-                      //   // e["ingredients"].map((i) => ingredients += "$i, ").toList();
-
-                      //   return Column(
-                      //     children: <Widget>[
-                      //       ListTile(
-                      //         contentPadding:
-                      //             EdgeInsets.only(left: 8, right: 8),
-                      //         onTap: () {
-                      //           Navigator.push(
-                      //               context,
-                      //               MaterialPageRoute(
-                      //                   builder: (c) => ProductScreen(
-                      //                       ProductData.fromDocument(e,
-                      //                           categoryId: doc.documentID))));
-                      //         },
-                      //         leading: Container(
-                      //           height: 80,
-                      //           width: 100,
-                      //           decoration: BoxDecoration(
-                      //               borderRadius: BorderRadius.circular(10),
-                      //               image: DecorationImage(
-                      //                   image: NetworkImage(e["images"][0]),
-                      //                   fit: BoxFit.cover)),
-                      //         )
-
-                      //         // CircleAvatar(
-                      //         //   radius: 25,
-                      //         //   backgroundImage: NetworkImage(e["images"][0]),
-                      //         // )
-
-                      //         ,
-                      //         title: Text(
-                      //           e["name"],
-                      //           style: TextStyle(
-                      //             fontSize: 20,
-                      //           ),
-                      //         ),
-                      //         subtitle: e["ingredients"] != null
-                      //             ? Text(getIngredients(e))
-                      //             : Text(e["description"]),
-                      //         trailing: Text(
-                      //             "R\$ ${e["price"].toStringAsFixed(2).replaceAll(".", ",")}",
-                      //             style: TextStyle(
-                      //               fontSize: 20,
-                      //               color: redColor,
-                      //             )),
-                      //       ),
-                      //       Divider(
-                      //         height: 2,
-                      //         color: Colors.grey,
-                      //       )
-                      //     ],
-                      //   );
-                      // }).toList(),
                     );
                   } else {
                     return Center(

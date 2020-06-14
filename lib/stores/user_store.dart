@@ -1,13 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:mobx/mobx.dart';
 import 'package:snacks/data/user_data.dart';
 part 'user_store.g.dart';
 
 class UserStore = _UserStoreBase with _$UserStore;
 
-abstract class _UserStoreBase extends ChangeNotifier with Store {
+abstract class _UserStoreBase with Store {
   _UserStoreBase() {
     _loadCurrentUser();
   }
@@ -75,8 +74,6 @@ abstract class _UserStoreBase extends ChangeNotifier with Store {
     }
 
     if (userData != null) isLoggedIn = true;
-    email = "";
-    pass = "";
   }
 
   @action
@@ -87,6 +84,7 @@ abstract class _UserStoreBase extends ChangeNotifier with Store {
         .then((authResult) async {
       user = authResult.user;
       await _loadCurrentUser();
+      isLoggedIn = true;
       //onSuccess();
     }).catchError((e) {
       // onFail();
@@ -105,8 +103,6 @@ abstract class _UserStoreBase extends ChangeNotifier with Store {
 
     isLoggedIn = false;
     loading = false;
-
-    notifyListeners();
   }
 
   @action

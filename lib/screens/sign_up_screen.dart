@@ -35,7 +35,6 @@ class _SignUpScreenState extends State<SignUpScreen> with LoginValidator {
     scaffoldKey.currentState.showSnackBar(SnackBar(
       content: Text("Usuário criado com sucesso"),
       backgroundColor: Theme.of(context).primaryColor,
-      duration: Duration(seconds: 2),
     ));
   }
 
@@ -43,7 +42,6 @@ class _SignUpScreenState extends State<SignUpScreen> with LoginValidator {
     scaffoldKey.currentState.showSnackBar(SnackBar(
       content: Text("Falha ao criar usuário"),
       backgroundColor: Colors.redAccent,
-      duration: Duration(seconds: 2),
     ));
   }
 
